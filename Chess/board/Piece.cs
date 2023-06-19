@@ -10,12 +10,14 @@
 
         public Board Board { get; set; }
 
-        public Piece(Position pos, Board board, Color color)
+        public Piece(Board board, Color color)
         {
-            Position = pos;
+            Position = null;
             Board = board;
             Color = color;
             MoveCounter = 0;
         }
+
+        
     }
 }
