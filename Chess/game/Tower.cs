@@ -1,9 +1,9 @@
 ﻿using board;
-namespace Chess.Pieces
+namespace game
 {
     internal class Tower : Piece
     {
-        public Tower(Board board, Color color):base(board, color) {}
+        public Tower(Board board, Color color) : base(board, color) { }
 
         public override string ToString()
         {

@@ -1,4 +1,5 @@
 ﻿using board;
+using game;
 
 namespace Chess
 {
@@ -8,8 +9,9 @@ namespace Chess
         {
             Board board = new Board(8, 8);
 
-            //board.SetPiece(tower, new Position(0,0));
-            //board.SetPiece(king, new Position(2,4));
+            board.SetPiece(new Tower(board, Color.White), new Position(0,0));
+            board.SetPiece(new King(board, Color.Black), new Position(0,4));
+            board.SetPiece(new Pawn(board, Color.White), new Position(2,3));
 
 
             Screen.PrintBoard(board);
