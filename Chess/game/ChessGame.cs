@@ -13,6 +13,8 @@ namespace game
 
         public HashSet<Piece> Pieces { get; set; }
 
+        public bool Check { get; set; }
+
         public ChessGame()
         {
             board = new Board(8, 8);
@@ -22,13 +24,83 @@ namespace game
             Pieces = new HashSet<Piece>();
             CapturedPieces = new HashSet<Piece>();
             PutPieces();
+            Check = false;
         }
 
         public void MakePlay(Position origin, Position destin)
         {
-            MakeMove(origin, destin);
-            ChangePlayer();
+            Piece capturedPiece = MakeMove(origin, destin);
+            
+            if (IsInCheck(ActualPlayer))
+            {
+                UndoMovement(origin,destin,capturedPiece);
+                throw new BoardException("You can't put yourself in check!");
+            }
+
+            if (IsInCheck(Adversary(ActualPlayer)))
+            {
+                Check = true;
+            }
+            else
+            {
+                Check = false;
+            }
+            
             Turn++;
+            ChangePlayer();
+        }
+
+        public void UndoMovement(Position origin, Position destin, Piece capturePiece)
+        {
+            Piece p = board.RemovePiece(destin);
+            p.DecreaseMoveCounter();
+            if (capturePiece != null)
+            {
+                board.PutPiece(capturePiece, destin);
+                CapturedPieces.Remove(capturePiece);
+            }
+            board.PutPiece(p, origin);
+        }
+        private Color Adversary(Color color)
+        {
+            if (color == Color.White)
+            {
+                return Color.Black;
+            }
+            else
+            {
+                return Color.White;
+            }
+        }
+
+        private Piece TheKing(Color color)
+        {
+            foreach (Piece x in InGamePieces(color))
+            {
+                if (x is King)
+                {
+                    return x;
+                }
+            }
+            return null;
+        }
+
+        public bool IsInCheck(Color color)
+        {
+            Piece R = TheKing(color); 
+            if (R == null)
+            {
+                throw new BoardException($"There are no Kings with the color {color} on the board!");
+            }
+            foreach (Piece piece in InGamePieces(Adversary(color)))
+            {
+                bool[,] mat = piece.PossibleMoves();
+                if (mat[R.Position.Row, R.Position.Column])
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void ValidateOriginPosition(Position pos)
@@ -66,7 +138,7 @@ namespace game
             }
         }
 
-        public void MakeMove(Position origin, Position destiny)
+        public Piece MakeMove(Position origin, Position destiny)
         {
             Piece p = board.RemovePiece(origin);
             p.IncreaseMoveCounter();
@@ -76,6 +148,7 @@ namespace game
             {
                 CapturedPieces.Add(CapturedPiece);
             }
+            return CapturedPiece;
         }
 
         public void PutNewPiece(char column, int row, Piece piece)
@@ -100,10 +173,14 @@ namespace game
         public HashSet<Piece> InGamePieces(Color color)
         {
             HashSet<Piece> aux = new HashSet<Piece>();
-            foreach (Piece x in CapturedPieces)
+            foreach (Piece x in Pieces)
             {
-                aux.Add(x);
+                if (x.Color == color)
+                {
+                    aux.Add(x);
+                }
             }
+            aux.ExceptWith(CapturedPiecesSet(color));
             return aux;
         }
         private void PutPieces()

@@ -68,7 +68,14 @@ namespace Chess
             Console.WriteLine();
             PrintCapturedPieces(match);
             Console.WriteLine();
-            Console.WriteLine("Turn: " + match.Turn + "\nPlayer: " + match.ActualPlayer + "\n"); 
+            Console.WriteLine("Turn: " + match.Turn + "\nPlayer: " + match.ActualPlayer + "\n");
+            Console.WriteLine();
+            if (match.Check)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Check!!!");
+                Console.ForegroundColor = ConsoleColor.White;
+            }
         }
 
         public static void PrintCapturedPieces(ChessGame match)

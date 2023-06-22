@@ -22,6 +22,11 @@
         {
             MoveCounter++;
         }
+
+        public void DecreaseMoveCounter()
+        {
+            MoveCounter--;
+        }
         public abstract bool[,] PossibleMoves();
 
         public bool CanMoveTo(Position position)
