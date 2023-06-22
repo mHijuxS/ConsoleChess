@@ -25,6 +25,21 @@ namespace game
             Turn++;
         }
 
+        public void ValidateOriginPosition(Position pos)
+        {
+            if (board.piece(pos) == null)
+            {
+                throw new BoardException("There is no piece at this position!");
+            }
+            if (ActualPlayer != board.piece(pos).Color)
+            {
+                throw new BoardException("This piece is not yours!");
+            }
+            if (!board.piece(pos).IsItPossibleToMove())
+            {
+                throw new BoardException("This piece can't move anywhere!");
+            }
+        }
         private void ChangePlayer()
         {
             if (ActualPlayer == Color.White)

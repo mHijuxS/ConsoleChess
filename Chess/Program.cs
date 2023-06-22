@@ -12,23 +12,30 @@ namespace Chess
                 ChessGame match = new ChessGame();
                 while (!match.Finished)
                 {
-                    Console.Clear();
-                    Screen.PrintBoard(match.board);
-                    Console.WriteLine("Turn: " + match.Turn + "\nPlayer: " + match.ActualPlayer + "\n");
+                    try
+                    {
+                        Console.Clear();
+                        Screen.PrintBoard(match.board);
+                        Console.WriteLine("Turn: " + match.Turn + "\nPlayer: " + match.ActualPlayer + "\n");
 
-                    Console.Write("Origin: ");
-                    Position origin = Screen.ReadChessPosition().ToPosition();
+                        Console.Write("Origin: ");
+                        Position origin = Screen.ReadChessPosition().ToPosition();
+                        match.ValidateOriginPosition(origin);
+                        bool[,] possibleMoves = match.board.piece(origin).PossibleMoves();
 
-                    bool[,] possibleMoves = match.board.piece(origin).PossibleMoves();
+                        Console.Clear();
+                        Screen.PrintBoard(match.board, possibleMoves);
 
-                    Console.Clear();
-                    Screen.PrintBoard(match.board, possibleMoves);
+                        Console.Write("Destin: ");
+                        Position destiny = Screen.ReadChessPosition().ToPosition();
 
-                    Console.Write("Destin: ");
-                    Position destiny = Screen.ReadChessPosition().ToPosition();
-
-                    match.MakePlay(origin, destiny);
-                    
+                        match.MakePlay(origin, destiny);
+                    }
+                    catch(BoardException e)
+                    {
+                        Console.WriteLine(e.Message);
+                        Console.ReadLine();
+                    }
                 }
 
             }

@@ -18,7 +18,7 @@ namespace game
             if (Color == Color.Black)
             {
                 //abaixo
-                pos.DefineValues(Position.Row, Position.Column + 1);
+                pos.DefineValues(Position.Row + 1, Position.Column);
                 if (Board.ValidPosition(pos) && CanMove(pos))
                 {
                     mat[pos.Row, pos.Column] = true;
@@ -27,7 +27,7 @@ namespace game
             else
             {
                 //acima
-                pos.DefineValues(Position.Row, Position.Column - 1);
+                pos.DefineValues(Position.Row - 1, Position.Column);
                 if (Board.ValidPosition(pos) && CanMove(pos))
                 {
                     mat[pos.Row, pos.Column] = true;
