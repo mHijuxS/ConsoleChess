@@ -60,16 +60,14 @@
             }
         }
 
-        public Piece PutPiece(Piece p, Position position)
+        public void PutPiece(Piece p, Position position)
         {
             if(IsPositionOccupied(position)==null)
             {
-                return null;
+                throw new BoardException("There is a piece in this position already!");
             }
-            Piece aux = piece(position);
-            aux.Position = null;
-            Pieces[position.Row, position.Column] = null;
-            return aux;
+            Pieces[position.Row, position.Column] = p;
+            p.Position = position;
         }
 
         public void ValidatePosition(Position pos)

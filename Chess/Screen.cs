@@ -10,6 +10,9 @@ namespace Chess
         {
             for (int i = 0; i < board.Rows; i++)
             {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(8-i + " ");
+                Console.ForegroundColor = ConsoleColor.White;
                 for (int j = 0; j < board.Columns; j++)
                 {
                         PrintPiece(board.piece(i, j));
@@ -19,7 +22,7 @@ namespace Chess
             }
             
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("a  b  c  d  e  f  g  h");
+            Console.WriteLine("  a  b  c  d  e  f  g  h");
             Console.ForegroundColor = ConsoleColor.White;
             
         }

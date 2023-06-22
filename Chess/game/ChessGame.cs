@@ -6,11 +6,13 @@ namespace game
         public Board board { get; set; }
         private int turn;
         private Color ActualPlayer;
+        public bool Finished { get; set; }
 
         public ChessGame()
         {
             board = new Board(8, 8);
             turn = 1;
+            Finished = false;
             ActualPlayer = Color.White;
             PutPieces();
         }
