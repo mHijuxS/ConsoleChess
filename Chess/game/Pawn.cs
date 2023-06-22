@@ -15,9 +15,6 @@ namespace game
             Position pos = new Position(0, 0);
             bool[,] mat = new bool[Board.Rows, Board.Columns];
 
-            //TODO
-
-
             if (Color == Color.Black)
             {
                 //abaixo
