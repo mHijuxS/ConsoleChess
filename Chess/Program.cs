@@ -15,8 +15,7 @@ namespace Chess
                     try
                     {
                         Console.Clear();
-                        Screen.PrintBoard(match.board);
-                        Console.WriteLine("Turn: " + match.Turn + "\nPlayer: " + match.ActualPlayer + "\n");
+                        Screen.PrintMatch(match);
 
                         Console.Write("Origin: ");
                         Position origin = Screen.ReadChessPosition().ToPosition();

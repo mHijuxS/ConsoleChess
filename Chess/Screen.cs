@@ -1,6 +1,8 @@
 ﻿using board;
 using game;
+using System.ComponentModel;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace Chess
 {
@@ -60,6 +62,36 @@ namespace Chess
 
         }
 
+        public static void PrintMatch(ChessGame match)
+        {
+            PrintBoard(match.board);
+            Console.WriteLine();
+            PrintCapturedPieces(match);
+            Console.WriteLine();
+            Console.WriteLine("Turn: " + match.Turn + "\nPlayer: " + match.ActualPlayer + "\n"); 
+        }
+
+        public static void PrintCapturedPieces(ChessGame match)
+        {
+            Console.WriteLine("Captured Pieces:");
+            Console.Write("Whites: ");
+            PrintSet(match.CapturedPiecesSet(Color.White));
+            Console.Write("Blacks: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            PrintSet(match.CapturedPiecesSet(Color.Black));
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        public static void PrintSet(HashSet<Piece> set)
+        {
+            Console.Write("[");
+
+            foreach (Piece piece in set)
+            {
+                Console.Write(piece + " ");
+            }
+            Console.Write("]\n");
+        }
         public static ChessPosition ReadChessPosition()
         {
             string s = Console.ReadLine()!;
