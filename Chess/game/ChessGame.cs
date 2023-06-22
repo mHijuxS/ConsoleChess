@@ -40,6 +40,14 @@ namespace game
                 throw new BoardException("This piece can't move anywhere!");
             }
         }
+
+        public void ValidateDestinPosition(Position origin, Position destin)
+        {
+            if (!board.piece(origin).CanMoveTo(destin))
+            {
+                throw new BoardException("Invalid destination!");
+            }
+        }
         private void ChangePlayer()
         {
             if (ActualPlayer == Color.White)

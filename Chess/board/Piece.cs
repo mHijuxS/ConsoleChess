@@ -24,6 +24,10 @@
         }
         public abstract bool[,] PossibleMoves();
 
+        public bool CanMoveTo(Position position)
+        {
+            return PossibleMoves()[position.Row, position.Column];
+        }
         public bool IsItPossibleToMove()
         {
             bool[,] mat = PossibleMoves();
