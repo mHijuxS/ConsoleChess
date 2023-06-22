@@ -4,20 +4,38 @@ namespace game
     internal class ChessGame
     {
         public Board board { get; set; }
-        private int turn;
-        private Color ActualPlayer;
+
+        public int Turn { get; set; }
+        public Color ActualPlayer { get; set; }
         public bool Finished { get; set; }
 
         public ChessGame()
         {
             board = new Board(8, 8);
-            turn = 1;
+            Turn = 1;
             Finished = false;
             ActualPlayer = Color.White;
             PutPieces();
         }
 
-        
+        public void MakePlay(Position origin, Position destin)
+        {
+            MakeMove(origin, destin);
+            ChangePlayer();
+            Turn++;
+        }
+
+        private void ChangePlayer()
+        {
+            if (ActualPlayer == Color.White)
+            {
+                ActualPlayer = Color.Black;
+            }
+            else
+            {
+                ActualPlayer = Color.White;
+            }
+        }
 
         public void MakeMove(Position origin, Position destiny)
         {

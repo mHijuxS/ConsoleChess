@@ -14,7 +14,7 @@ namespace Chess
                 {
                     Console.Clear();
                     Screen.PrintBoard(match.board);
-
+                    Console.WriteLine("Turn: " + match.Turn + "\nPlayer: " + match.ActualPlayer);
                     Console.Write("Origin: ");
                     Position origin = Screen.ReadChessPosition().ToPosition();
 
@@ -26,7 +26,7 @@ namespace Chess
                     Console.Write("Destin: ");
                     Position destiny = Screen.ReadChessPosition().ToPosition();
 
-                    match.MakeMove(origin, destiny);
+                    match.MakePlay(origin, destiny);
                     
                 }
 
