@@ -206,10 +206,11 @@ namespace game
                     {
                         if (mat[i, j])
                         {
+                            Position origin = piece.Position;
                             Position p = new Position(i, j);
                             Piece capturedPiece = MakeMove(piece.Position, p);
                             bool testCheck = IsInCheck(color);
-                            UndoMovement(piece.Position,p,capturedPiece);
+                            UndoMovement(origin,p,capturedPiece);
                             if (!testCheck)
                             {
                                 return false;
