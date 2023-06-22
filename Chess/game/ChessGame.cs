@@ -67,6 +67,26 @@ namespace game
                 CapturedPieces.Remove(capturePiece);
             }
             board.PutPiece(p, origin);
+
+            // Special play lil roq
+            if (p is King && destin.Column == origin.Column + 2)
+            {
+                Position originT = new Position(origin.Row, origin.Column + 3);
+                Position destinT = new Position(origin.Row, origin.Column + 1);
+                Piece T = board.RemovePiece(destinT);
+                T.DecreaseMoveCounter();
+                board.PutPiece(T, originT);
+            }
+
+            // Special play big roq
+            if (p is King && destin.Column == origin.Column - 2)
+            {
+                Position originT = new Position(origin.Row, origin.Column - 4);
+                Position destinT = new Position(origin.Row, origin.Column - 1);
+                Piece T = board.RemovePiece(destinT);
+                T.DecreaseMoveCounter();
+                board.PutPiece(T, originT);
+            }
         }
         private Color Adversary(Color color)
         {
@@ -155,6 +175,28 @@ namespace game
             {
                 CapturedPieces.Add(CapturedPiece);
             }
+
+
+
+            //Special play lil roq
+            if (p is King && destiny.Column == origin.Column + 2)
+            {
+                Position originT = new Position(origin.Row, origin.Column + 3);
+                Position destinT = new Position(origin.Row, origin.Column + 1);
+                Piece T = board.RemovePiece(originT);
+                T.IncreaseMoveCounter();
+                board.PutPiece(T, destinT);
+            }
+
+            //Special play big roq
+            if (p is King && destiny.Column == origin.Column - 2)
+            {
+                Position originT = new Position(origin.Row, origin.Column - 4);
+                Position destinT = new Position(origin.Row, origin.Column - 1);
+                Piece T = board.RemovePiece(originT);
+                T.IncreaseMoveCounter();
+                board.PutPiece(T, destinT);
+            }
             return CapturedPiece;
         }
 
@@ -223,12 +265,12 @@ namespace game
         }
         private void PutPieces()
         {
-            /*
+        
             PutNewPiece('a', 1, new Tower(board, Color.White));
             PutNewPiece('b', 1, new Horse(board, Color.White));
             PutNewPiece('c', 1, new Bishop(board, Color.White));
             PutNewPiece('d', 1, new Queen(board, Color.White));
-            PutNewPiece('e', 1, new King(board, Color.White));
+            PutNewPiece('e', 1, new King(board, Color.White, this));
             PutNewPiece('f', 1, new Bishop(board, Color.White));
             PutNewPiece('g', 1, new Horse(board, Color.White));
             PutNewPiece('h', 1, new Tower(board, Color.White));
@@ -252,19 +294,10 @@ namespace game
             PutNewPiece('b', 8, new Horse(board, Color.Black));
             PutNewPiece('c', 8, new Bishop(board, Color.Black));
             PutNewPiece('d', 8, new Queen(board, Color.Black));
-            PutNewPiece('e', 8, new King(board, Color.Black));
+            PutNewPiece('e', 8, new King(board, Color.Black, this));
             PutNewPiece('f', 8, new Bishop(board, Color.Black));
             PutNewPiece('g', 8, new Horse(board, Color.Black));
-            PutNewPiece('h', 8, new King(board, Color.Black));
-        */
-
-            PutNewPiece('c', 8, new King(board, Color.Black));
-            PutNewPiece('c', 7, new Pawn(board, Color.Black));
-            PutNewPiece('b', 6, new Queen(board, Color.White));
-            PutNewPiece('h', 4, new Tower(board, Color.White));
-            PutNewPiece('c', 3, new King(board, Color.White));
-            PutNewPiece('a', 1, new Tower(board, Color.White));
+            PutNewPiece('h', 8, new Tower(board, Color.Black));
         }
-
     }
 }

@@ -29,8 +29,7 @@ namespace Chess
                         Position destiny = Screen.ReadChessPosition().ToPosition();
                         match.ValidateDestinPosition(origin, destiny);
                         match.MakePlay(origin, destiny);
-                        Console.Clear();
-                        Screen.PrintMatch(match);
+                        
                     }
                     catch(BoardException e)
                     {
@@ -38,6 +37,8 @@ namespace Chess
                         Console.ReadLine();
                     }
                 }
+                Console.Clear();
+                Screen.PrintMatch(match);
 
             }
             catch(BoardException e)
