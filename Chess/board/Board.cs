@@ -45,6 +45,33 @@
             return true;
         }
 
+        public Piece RemovePiece(Position position)
+        {
+            if (piece(position) == null)
+            {
+                return null;
+            }
+            else
+            {
+                Piece aux = piece(position);
+                aux.Position = null;
+                Pieces[position.Row, position.Column] = null;
+                return aux;
+            }
+        }
+
+        public Piece PutPiece(Piece p, Position position)
+        {
+            if(IsPositionOccupied(position)==null)
+            {
+                return null;
+            }
+            Piece aux = piece(position);
+            aux.Position = null;
+            Pieces[position.Row, position.Column] = null;
+            return aux;
+        }
+
         public void ValidatePosition(Position pos)
         {
             if (!ValidPosition(pos))
@@ -53,6 +80,6 @@
             }
         }
 
-
+     
     }
 }

@@ -7,12 +7,16 @@ namespace Chess
     {
         static void Main(string[] args)
         {
-            ChessPosition test = new ChessPosition('a', 2);
+            try
+            {
+                ChessGame match = new ChessGame();
 
-            Console.WriteLine(test);
-
-            Console.WriteLine(test.ToPosition());
-
+                Screen.PrintBoard(match.board);
+            }
+            catch(BoardException e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }

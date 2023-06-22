@@ -18,6 +18,10 @@
             MoveCounter = 0;
         }
 
+        public void IncreaseMoveCounter()
+        {
+            MoveCounter++;
+        }
         public abstract bool[,] PossibleMoves();
         
     }
