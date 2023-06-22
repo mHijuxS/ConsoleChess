@@ -1,4 +1,6 @@
 ﻿using board;
+using System.Globalization;
+
 namespace Chess
 {
     internal class Screen
@@ -9,17 +11,33 @@ namespace Chess
             {
                 for (int j = 0; j < board.Columns; j++)
                 {
-                    if (board.piece(i, j) == null)
-                    {
-                        Console.Write("- ");
-                    }
-                    else
-                    {
-                        Console.Write(board.piece(i, j) + " ");
-                    }
-                    
+                        PrintPiece(board.piece(i, j));
+                        Console.Write(" ");
                 }
                 Console.WriteLine();
+            }
+        }
+
+        public static void PrintPiece(Piece piece)
+        {
+            if (piece == null)
+            {
+                Console.Write("- ");
+            }
+            else
+            {
+                if (piece.Color == Color.White)
+                {
+                    Console.Write(piece);
+                }
+                else
+                {
+                    ConsoleColor aux = Console.ForegroundColor;
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write(piece);
+                    Console.ForegroundColor = aux;
+                }
+                Console.Write(" ");
             }
         }
     }
