@@ -7,15 +7,12 @@ namespace Chess
     {
         static void Main(string[] args)
         {
-            Board board = new Board(8, 8);
+            ChessPosition test = new ChessPosition('a', 2);
 
-            board.SetPiece(new Tower(board, Color.White), new Position(0,0));
-            board.SetPiece(new King(board, Color.Black), new Position(0,4));
-            board.SetPiece(new Pawn(board, Color.White), new Position(2,3));
+            Console.WriteLine(test);
 
+            Console.WriteLine(test.ToPosition());
 
-            Screen.PrintBoard(board);
-            
         }
     }
 }
