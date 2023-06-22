@@ -41,10 +41,17 @@ namespace game
             {
                 Check = true;
             }
+
+            if (CheckMate(Adversary(ActualPlayer)))
+            {
+                Finished = true;
+            }
             else
             {
                 Check = false;
             }
+
+
             
             Turn++;
             ChangePlayer();
@@ -183,8 +190,39 @@ namespace game
             aux.ExceptWith(CapturedPiecesSet(color));
             return aux;
         }
+
+        public bool CheckMate(Color color)
+        {
+            if (!IsInCheck(color))
+            {
+                return false;
+            }
+            foreach (Piece piece in InGamePieces(color))
+            {
+                bool[,] mat = piece.PossibleMoves();
+                for (int i = 0; i < board.Rows; i++)
+                {
+                    for (int j = 0; j < board.Columns; j++)
+                    {
+                        if (mat[i, j])
+                        {
+                            Position p = new Position(i, j);
+                            Piece capturedPiece = MakeMove(piece.Position, p);
+                            bool testCheck = IsInCheck(color);
+                            UndoMovement(piece.Position,p,capturedPiece);
+                            if (!testCheck)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
+        }
         private void PutPieces()
         {
+            /*
             PutNewPiece('a', 1, new Tower(board, Color.White));
             PutNewPiece('b', 1, new Horse(board, Color.White));
             PutNewPiece('c', 1, new Bishop(board, Color.White));
@@ -217,6 +255,14 @@ namespace game
             PutNewPiece('f', 8, new Bishop(board, Color.Black));
             PutNewPiece('g', 8, new Horse(board, Color.Black));
             PutNewPiece('h', 8, new King(board, Color.Black));
+        */
+
+            PutNewPiece('c', 8, new King(board, Color.Black));
+            PutNewPiece('c', 7, new Pawn(board, Color.Black));
+            PutNewPiece('b', 6, new Queen(board, Color.White));
+            PutNewPiece('h', 4, new Tower(board, Color.White));
+            PutNewPiece('c', 3, new King(board, Color.White));
+            PutNewPiece('a', 1, new Tower(board, Color.White));
         }
 
     }

@@ -70,11 +70,21 @@ namespace Chess
             Console.WriteLine();
             Console.WriteLine("Turn: " + match.Turn + "\nPlayer: " + match.ActualPlayer + "\n");
             Console.WriteLine();
-            if (match.Check)
+            if (!match.Finished)
+            {
+                if (match.Check)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Check!!!");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+            }
+            else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Check!!!");
+                Console.WriteLine("CheckMate!!!");
                 Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("Winner: " + match.ActualPlayer);
             }
         }
 
