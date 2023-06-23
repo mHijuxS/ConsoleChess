@@ -41,6 +41,21 @@ namespace game
                 throw new BoardException("You can't put yourself in check!");
             }
 
+            Piece p = board.piece(destin);
+
+            // Promotion
+            if (p is Pawn)
+            {
+                if ((p.Color == Color.White && destin.Row == 0) || (p.Color == Color.Black && destin.Row == 7))
+                {
+                    p = board.RemovePiece(destin);
+                    Pieces.Remove(p);
+                    Piece queen = new Queen(board, p.Color);
+                    board.SetPiece(queen, destin);
+                    Pieces.Add(queen);
+                }
+            }
+
             if (IsInCheck(Adversary(ActualPlayer)))
             {
                 Check = true;
@@ -60,7 +75,6 @@ namespace game
                 ChangePlayer();
             }
 
-            Piece p = board.piece(destin);
             if (p is Pawn && (destin.Row == origin.Row - 2 || destin.Row == origin.Row + 2))
             {
                 EnPassantVulnerable = p;
@@ -314,39 +328,39 @@ namespace game
         }
         private void PutPieces()
         {
-        
-            PutNewPiece('a', 1, new Tower(board, Color.White));
-            PutNewPiece('b', 1, new Horse(board, Color.White));
-            PutNewPiece('c', 1, new Bishop(board, Color.White));
-            PutNewPiece('d', 1, new Queen(board, Color.White));
-            PutNewPiece('e', 1, new King(board, Color.White, this));
-            PutNewPiece('f', 1, new Bishop(board, Color.White));
-            PutNewPiece('g', 1, new Horse(board, Color.White));
-            PutNewPiece('h', 1, new Tower(board, Color.White));
-            PutNewPiece('a', 2, new Pawn(board, Color.White, this));
-            PutNewPiece('b', 2, new Pawn(board, Color.White, this));
-            PutNewPiece('c', 2, new Pawn(board, Color.White, this));
-            PutNewPiece('d', 2, new Pawn(board, Color.White, this));
-            PutNewPiece('e', 2, new Pawn(board, Color.White, this));
-            PutNewPiece('f', 2, new Pawn(board, Color.White, this));
-            PutNewPiece('g', 2, new Pawn(board, Color.White, this));
-            PutNewPiece('h', 2, new Pawn(board, Color.White, this));
-            PutNewPiece('a', 7, new Pawn(board, Color.Black, this));
-            PutNewPiece('b', 7, new Pawn(board, Color.Black, this));
-            PutNewPiece('c', 7, new Pawn(board, Color.Black, this));
-            PutNewPiece('d', 7, new Pawn(board, Color.Black, this));
-            PutNewPiece('e', 7, new Pawn(board, Color.Black, this));
-            PutNewPiece('f', 7, new Pawn(board, Color.Black, this));
-            PutNewPiece('g', 7, new Pawn(board, Color.Black, this));
-            PutNewPiece('h', 7, new Pawn(board, Color.Black, this));
-            PutNewPiece('a', 8, new Tower(board, Color.Black));
-            PutNewPiece('b', 8, new Horse(board, Color.Black));
-            PutNewPiece('c', 8, new Bishop(board, Color.Black));
-            PutNewPiece('d', 8, new Queen(board, Color.Black));
-            PutNewPiece('e', 8, new King(board, Color.Black, this));
-            PutNewPiece('f', 8, new Bishop(board, Color.Black));
-            PutNewPiece('g', 8, new Horse(board, Color.Black));
-            PutNewPiece('h', 8, new Tower(board, Color.Black));
+                PutNewPiece('a', 1, new Tower(board, Color.White));
+                PutNewPiece('b', 1, new Horse(board, Color.White));
+                PutNewPiece('c', 1, new Bishop(board, Color.White));
+                PutNewPiece('d', 1, new Queen(board, Color.White));
+                PutNewPiece('e', 1, new King(board, Color.White, this));
+                PutNewPiece('f', 1, new Bishop(board, Color.White));
+                PutNewPiece('g', 1, new Horse(board, Color.White));
+                PutNewPiece('h', 1, new Tower(board, Color.White));
+                PutNewPiece('a', 2, new Pawn(board, Color.White, this));
+                PutNewPiece('b', 2, new Pawn(board, Color.White, this));
+                PutNewPiece('c', 2, new Pawn(board, Color.White, this));
+                PutNewPiece('d', 2, new Pawn(board, Color.White, this));
+                PutNewPiece('e', 2, new Pawn(board, Color.White, this));
+                PutNewPiece('f', 2, new Pawn(board, Color.White, this));
+                PutNewPiece('g', 2, new Pawn(board, Color.White, this));
+                PutNewPiece('h', 2, new Pawn(board, Color.White, this));
+                PutNewPiece('a', 7, new Pawn(board, Color.Black, this));
+                PutNewPiece('b', 7, new Pawn(board, Color.Black, this));
+                PutNewPiece('c', 7, new Pawn(board, Color.Black, this));
+                PutNewPiece('d', 7, new Pawn(board, Color.Black, this));
+                PutNewPiece('e', 7, new Pawn(board, Color.Black, this));
+                PutNewPiece('f', 7, new Pawn(board, Color.Black, this));
+                PutNewPiece('g', 7, new Pawn(board, Color.Black, this));
+                PutNewPiece('h', 7, new Pawn(board, Color.Black, this));
+                PutNewPiece('a', 8, new Tower(board, Color.Black));
+                PutNewPiece('b', 8, new Horse(board, Color.Black));
+                PutNewPiece('c', 8, new Bishop(board, Color.Black));
+                PutNewPiece('d', 8, new Queen(board, Color.Black));
+                PutNewPiece('e', 8, new King(board, Color.Black, this));
+                PutNewPiece('f', 8, new Bishop(board, Color.Black));
+                PutNewPiece('g', 8, new Horse(board, Color.Black));
+                PutNewPiece('h', 8, new Tower(board, Color.Black));
+            
         }
     }
 }
