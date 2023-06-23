@@ -16,49 +16,49 @@ namespace game
 
             Position pos = new Position(0, 0);
 
-            pos.DefineValues(pos.Row -1, pos.Column - 2);
+            pos.DefineValues(Position.Row -1, Position.Column - 2);
             if(Board.ValidPosition(pos) && CanMoveTo(pos)) 
             {
                 mat[pos.Row, pos.Column] = true;
             }
 
-            pos.DefineValues(pos.Row - 1, pos.Column + 2);
+            pos.DefineValues(Position.Row - 1, Position.Column + 2);
             if (Board.ValidPosition(pos) && CanMoveTo(pos))
             {
                 mat[pos.Row, pos.Column] = true;
             }
 
-            pos.DefineValues(pos.Row + 1, pos.Column - 2);
+            pos.DefineValues(Position.Row + 1, Position.Column - 2);
             if (Board.ValidPosition(pos) && CanMoveTo(pos))
             {
                 mat[pos.Row, pos.Column] = true;
             }
 
-            pos.DefineValues(pos.Row + 1, pos.Column + 2);
+            pos.DefineValues(Position.Row + 1, Position.Column + 2);
             if (Board.ValidPosition(pos) && CanMoveTo(pos))
             {
                 mat[pos.Row, pos.Column] = true;
             }
 
-            pos.DefineValues(pos.Row - 2, pos.Column - 1);
+            pos.DefineValues(Position.Row - 2, Position.Column - 1);
             if (Board.ValidPosition(pos) && CanMoveTo(pos))
             {
                 mat[pos.Row, pos.Column] = true;
             }
 
-            pos.DefineValues(pos.Row + 2, pos.Column - 1);
+            pos.DefineValues(Position.Row + 2, Position.Column - 1);
             if (Board.ValidPosition(pos) && CanMoveTo(pos))
             {
                 mat[pos.Row, pos.Column] = true;
             }
 
-            pos.DefineValues(pos.Row - 2, pos.Column + 1);
+            pos.DefineValues(Position.Row - 2, Position.Column + 1);
             if (Board.ValidPosition(pos) && CanMoveTo(pos))
             {
                 mat[pos.Row, pos.Column] = true;
             }
 
-            pos.DefineValues(pos.Row + 2, pos.Column + 1);
+            pos.DefineValues(Position.Row + 2, Position.Column + 1);
             if (Board.ValidPosition(pos) && CanMoveTo(pos))
             {
                 mat[pos.Row, pos.Column] = true;

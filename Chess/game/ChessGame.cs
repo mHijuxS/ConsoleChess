@@ -41,6 +41,10 @@ namespace game
             {
                 Check = true;
             }
+            else
+            {
+                Check = false;
+            }
 
             if (CheckMate(Adversary(ActualPlayer)))
             {
@@ -48,13 +52,10 @@ namespace game
             }
             else
             {
-                Check = false;
+                Turn++;
+                ChangePlayer();
             }
 
-
-            
-            Turn++;
-            ChangePlayer();
         }
 
         public void UndoMovement(Position origin, Position destin, Piece capturePiece)
